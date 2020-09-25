@@ -9,13 +9,6 @@ package examen2lab_gustavopineda;
  *
  * @author Usuario
  */
-public class Examen2Lab_GustavoPineda {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class adminUsuario {
     
 }
