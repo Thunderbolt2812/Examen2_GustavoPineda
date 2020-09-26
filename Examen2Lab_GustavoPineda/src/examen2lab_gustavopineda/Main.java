@@ -307,6 +307,11 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setText("Solicitudes");
 
         jButton6.setText("Aceptar");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -400,8 +405,16 @@ public class Main extends javax.swing.JFrame {
             if (username.equals(au.getListaUsuario().get(i).getUsername()) && contraseña.equals(au.getListaUsuario().get(i).getContraseña())) {
                 b_signup.setEnabled(false);
                 b_login.setEnabled(false);
+                usLog = username;
                 loggedin = true;
                 
+                adminSolicitud as = new adminSolicitud("/."+username+".mga");
+                as.cargarArchivo();
+                for (int p = 0; p < as.getListaSolicitud().size(); p++) {
+                    Object[]newrow = {as.getListaSolicitud().get(p).getNombre(),as.getListaSolicitud().get(p).getUsuario()};
+                    DefaultTableModel sol = (DefaultTableModel) t_solicitudes.getModel();
+                    sol.addRow(newrow);
+                }
                 JOptionPane.showMessageDialog(null,"Logged in");
                 for (int j = 0; j < au.getListaUsuario().size(); j++) {
                     if (!username.equals(au.getListaUsuario().get(j).getUsername())) {
@@ -442,10 +455,13 @@ public class Main extends javax.swing.JFrame {
             au.cargarArchivo();
             au.setUsuario(x);
             au.escribirArchivo();
+            adminSolicitud as = new adminSolicitud("./"+usuario+".mga");
+            as.cargarArchivo();
+            as.escribirArchivo();
             JOptionPane.showMessageDialog(null,"Usuario creado exitosamente");
             jd_signup.setVisible(false);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Ocurrio un error verifique que el campo de numero de telefono sean solo ");
+            JOptionPane.showMessageDialog(null,"Ocurrio un error verifique que el campo de numero de telefono sean solo numeros ");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -463,6 +479,14 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario de la tabla");
         }
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        if (t_solicitudes.getSelectedRow()!=-1) {
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un elemento de la tabla primero");
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -538,5 +562,5 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_user;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
-
+    String usLog;
 }
