@@ -5,13 +5,17 @@
  */
 package examen2lab_gustavopineda;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Usuario
  */
-public class Solicitud {
+public class Solicitud implements Serializable {
     private String nombre;
     private String usuario;
+    
+    private static final long SerialVersionUID=7483L;
 
     public Solicitud(String nombre, String usuario) {
         this.nombre = nombre;

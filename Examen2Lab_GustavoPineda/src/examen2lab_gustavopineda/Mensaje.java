@@ -14,16 +14,14 @@ import java.util.Date;
 public class Mensaje {
     private String contenido;
     private Date fecha;
-    private Date hora;
     private String leido;
 
     public Mensaje() {
     }
 
-    public Mensaje(String contenido, Date fecha, Date hora, String leido) {
+    public Mensaje(String contenido, Date fecha,  String leido) {
         this.contenido = contenido;
         this.fecha = fecha;
-        this.hora = hora;
         this.leido = leido;
     }
 
@@ -43,14 +41,6 @@ public class Mensaje {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
-        return hora;
-    }
-
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
     public String getLeido() {
         return leido;
     }
@@ -61,7 +51,7 @@ public class Mensaje {
 
     @Override
     public String toString() {
-        return "Mensaje: " + "Contenido:" + contenido + ", Fecha:" + fecha + ", Hora:" + hora + ", Leido:" + leido;
+        return "Mensaje: " + "Contenido:" + contenido + ", Fecha:" + fecha +  ", Leido:" + leido;
     }
 
     

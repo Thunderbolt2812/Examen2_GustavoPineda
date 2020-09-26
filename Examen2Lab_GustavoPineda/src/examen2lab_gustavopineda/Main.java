@@ -6,8 +6,11 @@
 package examen2lab_gustavopineda;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -20,9 +23,9 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        ab=new administrarBarra(pg);
-        Thread proceso2 = new Thread(ab);
-        proceso2.start();
+        ab = new administrarBarra(pg);
+        Thread proceso = new Thread(ab);
+        proceso.start();
     }
 
     /**
@@ -55,21 +58,20 @@ public class Main extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         tf_numtel = new javax.swing.JFormattedTextField();
         jd_chat = new javax.swing.JDialog();
-        jl_nombre = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton7 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tf_enviar = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jd_historial = new javax.swing.JDialog();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jLabel12 = new javax.swing.JLabel();
         jd_barra = new javax.swing.JDialog();
         pg = new javax.swing.JProgressBar();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_user = new javax.swing.JTextField();
@@ -81,7 +83,7 @@ public class Main extends javax.swing.JFrame {
         b_signup = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        t_chats = new javax.swing.JTree();
         jButton4 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         t_solicitudes = new javax.swing.JTable();
@@ -250,10 +252,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        jl_nombre.setText("Nombre");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
         jScrollPane5.setViewportView(jTextArea1);
 
         jButton7.setText("Enviar");
@@ -280,9 +281,8 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jd_chatLayout.createSequentialGroup()
                         .addComponent(jButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_nombre))
+                        .addComponent(tf_enviar))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_chatLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,30 +292,16 @@ public class Main extends javax.swing.JFrame {
         jd_chatLayout.setVerticalGroup(
             jd_chatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_chatLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jl_nombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(47, 47, 47)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jd_chatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_enviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addContainerGap())
         );
-
-        jMenu2.setText("jMenu2");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jPopupMenu2.add(jMenu2);
 
         jScrollPane6.setViewportView(jTextPane1);
 
@@ -358,6 +344,13 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(pg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("jMenu1");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenu1.add(jMenuItem1);
+
+        jPopupMenu1.add(jMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -411,8 +404,13 @@ public class Main extends javax.swing.JFrame {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Grupal");
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane3.setViewportView(jTree1);
+        t_chats.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        t_chats.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_chatsMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(t_chats);
 
         jButton4.setText("Chat");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -449,6 +447,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton9.setText("Eliminar Cuenta");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -552,18 +555,18 @@ public class Main extends javax.swing.JFrame {
                 b_login.setEnabled(false);
                 usLog = username;
                 loggedin = true;
-                
-                adminSolicitud as = new adminSolicitud("/."+username+".mga");
+
+                adminSolicitud as = new adminSolicitud("/." + username + ".mga");
                 as.cargarArchivo();
                 for (int p = 0; p < as.getListaSolicitud().size(); p++) {
-                    Object[]newrow = {as.getListaSolicitud().get(p).getNombre(),as.getListaSolicitud().get(p).getUsuario()};
+                    Object[] newrow = {as.getListaSolicitud().get(p).getNombre(), as.getListaSolicitud().get(p).getUsuario()};
                     DefaultTableModel sol = (DefaultTableModel) t_solicitudes.getModel();
                     sol.addRow(newrow);
                 }
-                JOptionPane.showMessageDialog(null,"Logged in");
+                JOptionPane.showMessageDialog(null, "Logged in");
                 for (int j = 0; j < au.getListaUsuario().size(); j++) {
                     if (!username.equals(au.getListaUsuario().get(j).getUsername())) {
-                        Object[]newrow = {au.getListaUsuario().get(j).getNombre(),au.getListaUsuario().get(j).getApellido(),au.getListaUsuario().get(j).getUsername()};
+                        Object[] newrow = {au.getListaUsuario().get(j).getNombre(), au.getListaUsuario().get(j).getApellido(), au.getListaUsuario().get(j).getUsername()};
                         DefaultTableModel dtm = (DefaultTableModel) t_usuarios.getModel();
                         dtm.addRow(newrow);
                     }
@@ -600,13 +603,13 @@ public class Main extends javax.swing.JFrame {
             au.cargarArchivo();
             au.setUsuario(x);
             au.escribirArchivo();
-            adminSolicitud as = new adminSolicitud("./"+usuario+".mga");
+            adminSolicitud as = new adminSolicitud("./" + usuario + ".mga");
             as.cargarArchivo();
             as.escribirArchivo();
-            JOptionPane.showMessageDialog(null,"Usuario creado exitosamente");
+            JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
             jd_signup.setVisible(false);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Ocurrio un error verifique que el campo de numero de telefono sean solo numeros ");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error verifique que el campo de numero de telefono sean solo numeros ");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -618,39 +621,74 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        if (t_usuarios.getSelectedRow()!=-1) {
-            Usuario u = (Usuario)t_usuarios.getValueAt(t_usuarios.getSelectedRow(), 3);
-        }else{
+        if (t_usuarios.getSelectedRow() != -1) {
+            String user = (String) t_usuarios.getValueAt(t_usuarios.getSelectedRow(), 2);
+            adminUsuario au = new adminUsuario("./Usuario.mga");
+            au.cargarArchivo();
+            Usuario u = new Usuario();
+            for (int i = 0; i < au.getListaUsuario().size(); i++) {
+                if (user.equals(au.getListaUsuario().get(i).getUsername())) {
+                    u = au.getListaUsuario().get(i);
+                }
+            }
+            Object[] newrow = {u.getNombre(), u.getUsername()};
+            DefaultTableModel tft = (DefaultTableModel) t_solicitudes.getModel();
+            tft.addRow(newrow);
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario de la tabla");
         }
+        jd_agregarA.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        if (t_solicitudes.getSelectedRow()!=-1) {
-            Usuario u = (Usuario)t_solicitudes.getValueAt(t_solicitudes.getSelectedRow(), 2);
+        if (t_solicitudes.getSelectedRow() != -1) {
+            String user = (String) t_solicitudes.getValueAt(t_solicitudes.getSelectedRow(), 1);
+            adminUsuario au = new adminUsuario("./Usuario.mga");
+            au.cargarArchivo();
+            Usuario u = new Usuario();
+            for (int i = 0; i < au.getListaUsuario().size(); i++) {
+                if (user.equals(au.getListaUsuario().get(i).getUsername())) {
+                    u = au.getListaUsuario().get(i);
+                }
+            }
             DefaultTableModel amigos = (DefaultTableModel) t_amigos.getModel();
-            Object[]newrow = {u.getNombre(),u.getUsername()};
+            Object[] newrow = {u.getNombre(), u.getUsername()};
             amigos.addRow(newrow);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione un elemento de la tabla primero");
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        if (t_amigos.getSelectedRow()!=-1) {
+        if (t_amigos.getSelectedRow() != -1) {
             jd_chat.setModal(true);
             jd_chat.pack();
             jd_chat.setLocationRelativeTo(this);
             jd_chat.setVisible(true);
-            Usuario u = (Usuario)t_amigos.getValueAt(t_amigos.getSelectedRow(), 2);  
-            Privado pr = new Privado(null,u);
-            
-            adminPrivado ap = new adminPrivado("./"+usLog+"chat"+u.getUsername()+".mga");
+            String user = (String) t_amigos.getValueAt(t_amigos.getSelectedRow(), 1);
+            adminUsuario au = new adminUsuario("./Usuario.mga");
+            au.cargarArchivo();
+            Usuario u = new Usuario();
+            for (int i = 0; i < au.getListaUsuario().size(); i++) {
+                if (user.equals(au.getListaUsuario().get(i).getUsername())) {
+                    u = au.getListaUsuario().get(i);
+                }
+            }
+            Privado pr = new Privado(null, u);
+            adminPrivado ap = new adminPrivado("./" + usLog + "chat" + u.getUsername() + ".mga");
             ap.cargarArchivo();
             ap.getListaPrivado().add(pr);
             ap.escribirArchivo();
-            jl_nombre.setText(u.getUsername());
-        }else{
+            DefaultTreeModel modeloARBOL = (DefaultTreeModel) t_chats.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).toString().equals("Privado")) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(pr.getUser().getUsername());
+                    ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                }
+            }
+            modeloARBOL.reload();
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione una persona de la tabla de amigos para chatear");
         }
     }//GEN-LAST:event_jButton4MouseClicked
@@ -659,16 +697,36 @@ public class Main extends javax.swing.JFrame {
         jd_chat.setVisible(false);
     }//GEN-LAST:event_jButton8MouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jd_historial.setModal(true);
-        jd_historial.pack();
-        jd_historial.setLocationRelativeTo(this);
-        jd_historial.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        String p;
+        String user = (String) t_amigos.getValueAt(t_amigos.getSelectedRow(), 1);
+        for (int i = 0; i < p.size(); i++) {
+            if (p.get(i).getUser().getUsername().equals(user)) {
+                String contenido = tf_enviar.getText();
+                Date fecha = new Date();
+                String leido = "leido";
+                Mensaje m = new Mensaje(contenido,fecha,leido);
+                p.get(i).getListaM().add(m);
+            }
+        }
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void t_chatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_chatsMouseClicked
+        if (evt.isMetaDown()) {
+            int row = t_chats.getClosestRowForLocation(evt.getX(), evt.getY());
+            t_chats.setSelectionRow(row);
+            Object v1 = t_chats.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) v1; 
+
+            if (nodo_seleccionado.getUserObject() instanceof Privado) { 
+                privado = (Privado) nodo_seleccionado.getUserObject();
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_t_chatsMouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        
+    }//GEN-LAST:event_jButton9MouseClicked
 
     /**
      * @param args the command line arguments
@@ -690,7 +748,7 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -723,9 +781,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -733,23 +791,22 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JDialog jd_agregarA;
     private javax.swing.JDialog jd_barra;
     private javax.swing.JDialog jd_chat;
     private javax.swing.JDialog jd_historial;
     private javax.swing.JDialog jd_signup;
-    private javax.swing.JLabel jl_nombre;
     private javax.swing.JProgressBar pg;
     private javax.swing.JSpinner sp_cal;
     private javax.swing.JTable t_amigos;
+    private javax.swing.JTree t_chats;
     private javax.swing.JTable t_solicitudes;
     private javax.swing.JTable t_usuarios;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_contra;
     private javax.swing.JTextField tf_contraseña;
+    private javax.swing.JTextField tf_enviar;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JFormattedTextField tf_numtel;
     private javax.swing.JTextField tf_user;
@@ -758,4 +815,6 @@ public class Main extends javax.swing.JFrame {
     String usLog;
     ArrayList<Privado> p;
     administrarBarra ab;
+    DefaultMutableTreeNode nodo_seleccionado;
+    Privado privado;
 }
